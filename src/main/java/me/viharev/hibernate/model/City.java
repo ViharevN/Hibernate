@@ -1,14 +1,28 @@
 package me.viharev.hibernate.model;
 
+import jakarta.persistence.*;
+
+import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "city")
 public class City {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "city_id")
     private int city_id;
+    @Column(name = "city_name")
     private String city_name;
 
-    public City(int city_id, String city_name) {
-        this.city_id = city_id;
+    @OneToMany(mappedBy = "city_id", cascade = CascadeType.ALL)
+    private List<Employee> employees;
+
+    public City() {
+    }
+
+    public City(String city_name) {
         this.city_name = city_name;
     }
 

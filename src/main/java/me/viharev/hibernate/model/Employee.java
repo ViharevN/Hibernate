@@ -20,27 +20,18 @@ public class Employee {
     private String gender;
     @Column(name = "age")
     private int age;
-    @Column(name = "city_id")
-    private int city_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "city_id")
+    private City city_id;
 
     public Employee() {
     }
 
-    public Employee(String first_name, String last_name, String gender, int age, int city_id) {
+    public Employee(String first_name, String last_name, String gender, int age) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.gender = gender;
         this.age = age;
-        this.city_id = city_id;
-    }
-
-    public Employee(int id, String first_name, String last_name, String gender, int age, int city_id) {
-        this.id = id;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.gender = gender;
-        this.age = age;
-        this.city_id = city_id;
     }
 
     public int getId() {
@@ -83,11 +74,11 @@ public class Employee {
         this.age = age;
     }
 
-    public int getCity_id() {
+    public City getCity_id() {
         return city_id;
     }
 
-    public void setCity_id(int city_id) {
+    public void setCity_id(City city_id) {
         this.city_id = city_id;
     }
 
@@ -108,7 +99,7 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return id == employee.id && age == employee.age && city_id == employee.city_id && Objects.equals(first_name, employee.first_name) && Objects.equals(last_name, employee.last_name) && Objects.equals(gender, employee.gender);
+        return id == employee.id && age == employee.age && Objects.equals(first_name, employee.first_name) && Objects.equals(last_name, employee.last_name) && Objects.equals(gender, employee.gender) && Objects.equals(city_id, employee.city_id);
     }
 
     @Override
